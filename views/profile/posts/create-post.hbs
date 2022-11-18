@@ -1,0 +1,11 @@
+<h2>Create a Post</h2>
+
+<form method="post" action="/profile/posts">
+<label>Post Title:</label>
+    <input type="text" name="title">
+<label>Post Description:</label>
+    <input type="text" name="description">
+    <button href="{{user._id}}/profile/posts">Create Post</button>
+    <label>Author:</label>
+    <input disabled value="{{user.username}}">
+</form>
