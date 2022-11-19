@@ -5,7 +5,7 @@
     <input type="text" name="title">
 <label>Post Description:</label>
     <input type="text" name="description">
-    <button href="{{user._id}}/profile/posts">Create Post</button>
+    <button>Create Post</button>
     <label>Author:</label>
-    <input disabled value="{{user.username}}">
+    <input name="author" value="{{user.username}}" readonly>
 </form>

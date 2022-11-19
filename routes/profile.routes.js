@@ -23,19 +23,31 @@ router.get('/:id/profile/create-post', (req,res)=>{
 
 
 router.post('/profile/posts', (req, res)=>{
-    const { title, description } = req.body
-    Post.create({title, description})
+    const { title, description, author } = req.body
+    let id =req.params.id
+    Post.create({title, description, author})
     .then (post =>{
-        Post.find(post)
-        .populate('author')
-        console.log(post)
-        res.render('profile/profile-page')
+        User.findOne({username: author})
+        .then (user =>{
+            user.posts.push(post)
+            console.log(user)
+            user.save()
+            User.findOne({username: user.username}).populate("posts")
+            .then ((populatedData)=>{
+                console.log("podata" + populatedData)
+                res.render(`profile/posts/list`, {populatedData})
+            })
+            //return user[0].posts.push(post._id)
+        })
+        //User.find({username: author})
+        //.populate('posts')
+        
     })
-    
 })
 
-router.get('/:id/profile/posts', (req, res)=>{
-    res.render('profile/posts/posts')
+
+router.get('/profile/posts', (req, res)=>{
+    res.render('profile/posts/list')
 })
 
 module.exports = router

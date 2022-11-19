@@ -1,0 +1,7 @@
+<h1>Posts List:</h1>
+<h2>{{populatedData.username}}</h2>
+{{#each populatedData.posts}}
+    <h3>Title: {{this.title}}</h3>
+    <p>{{this.description}}</p>
+    <p> By: {{this.author}}</p>
+{{/each}}
